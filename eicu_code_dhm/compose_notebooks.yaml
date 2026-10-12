@@ -1,0 +1,35 @@
+version: "3.3"
+services:
+  remote-interpreter:
+    container_name: dani-thesis-notebooks-dev
+    build:
+      context: .
+      dockerfile: Dockerfile_Notebooks
+    image: dani-thesis-notebooks-image
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./hydra:/home/danielbrkr/eicu_code_dhm/hydra
+      - ./intermediary_data:/home/danielbrkr/eicu_code_dhm/intermediary_data
+      - ./plot_outputs:/home/danielbrkr/eicu_code_dhm/plot_outputs
+      - ./workspace_dani/:/home/danielbrkr/eicu_code_dhm/workspace_dani
+    ports:
+      - "8888:8888"
+      - "5999:22"
+    #   command: bash -c "jupyter notebook --notebook-dir=/workspace --ip=0.0.0.0 --nrowser --allow-root"
+    # Todo: Check if command overrides the ssh server start up
+    #command:
+    # sleep infinity
+
+    deploy:
+      resources:
+        limits:
+          cpus: "12"
+          memory: 600G
+        reservations:
+          cpus: "8"
+          memory: 128G
+
+
+
+

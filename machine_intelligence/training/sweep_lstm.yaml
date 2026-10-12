@@ -1,0 +1,57 @@
+project: "hyper-tuning-final-2-lstm"
+program: machine_intelligence/training/hyperparameter_run_lstm.py
+method: bayes
+metric:
+  name: val/auroc
+  goal: maximize
+
+parameters:
+  data:
+    values: [ cohort_a_r0.4_prev_0.3_imp_none ]
+  params.batch_size_gpu:
+    values: [ 32, 64, 128, 256 ]
+  optimizer:
+    values: [ "Adam" ]
+  optimizer.params.learning_rate:
+    distribution: uniform
+    min: 0.00001
+    max: 0.1
+  optimizer.params.weight_decay:
+    distribution: uniform
+    min: 0.00001
+    max: 0.01
+  model.net.num_layers:
+    distribution: int_uniform
+    min: 1
+    max: 3
+  model.net.num_hidden_size:
+    values: [ 16, 32, 64, 128, 256 ]
+  model.net.num_ts_out:
+    values: [ 2, 4, 8, 16, 32, 64 ]
+  model.net.num_static_hidden:
+    values: [ 2,4,8,16,32,64,128,256,512,1024 ]
+  model.net.num_static_outs:
+    values: [ 1,2,4,8,16,32,64 ]
+  model.net.num_classifier_head_hidden:
+    values: [8, 16, 32, 64, 128, 256]
+  model.net.dropout:
+    values: [ 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ]
+  model.net.dropout_static:
+    values: [ 0.0, 0.1, 0.2, 0.3, 0.4, 0.5 ]
+
+early_terminate:
+  type: hyperband
+  s: 2
+  eta: 3
+  max_iter: 20
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - model=lstm
+  #- data=cohort_a
+  - experiment.experiment_name=hyper-tuning-final-2-lstm
+  - experiment.profiling=False
+  - experiment.dev_run=False
+  - ${args_no_hyphens}

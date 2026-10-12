@@ -1,0 +1,16 @@
+version: '3.9'
+name: thesis-pytorch-dev # change this is you want to have different compose stacks
+services:
+  pytorch-dev:
+    container_name: thesis-pytorch-dev
+    build:
+      dockerfile: Dockerfile_Pytorch
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./workspace_dani:/home/eicu_code_dhm
+    ports:
+      - "8888:8888"
+ #   command: bash -c "jupyter notebook --notebook-dir=/workspace --ip=0.0.0.0 --no-browser --allow-root"
+    command:
+      sleep infinity

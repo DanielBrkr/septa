@@ -1,0 +1,21 @@
+debug_mode: False # limits the used used used rows for each table
+draft_mode: False # draft_mode=True doesn't save to files
+
+defaults:
+  - _self_
+  - data: data_quality_assessment
+
+metadata:
+  timestamp: ${now:%Y-%m-%d}
+
+directories:
+  # data is intended to be the directory that contains the parquet files one level below
+  data: ${hydra:runtime.cwd}
+  # plot outputs root is intended to be the dir that contains a subdir for each plot type
+  outputs_root: ${hydra:runtime.cwd}/intermediary_data/
+
+hydra:
+  run:
+    dir: hydra/single-run/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: hydra/multi-run/${now:%Y-%m-%d}/${now:%H-%M-%S}

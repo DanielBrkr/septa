@@ -1,0 +1,90 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "apacheapsvar"
+table_name_pretty: "APACHE APS"
+file_name: "apache_aps_var"
+file_suffix: "regular"
+time_offset_name: ""
+time_delta_column: ""
+
+paths:
+  table_location: intermediary_data/tables_basis/2024-05-27/apache_aps_var_regular.parquet
+
+metadata:
+  na_equivalent_value: -1
+
+data_type_overrides:
+  intubated: category
+  vent: category
+  dialysis: category
+  eyes: category
+  motor: category
+  verbal: category
+  meds: category
+
+# when either lists are empty -> keeping all columns
+dropping_columns: False
+columns_to_drop: []
+columns_to_keep: []
+
+variable_units:
+  intubated: "Boolean"
+  vent: "Boolean"
+  dialysis: "Boolean"
+  eyes: "GCS Score"
+  motor: "GCS Score"
+  verbal: "GCS Score"
+  meds: "Binary Indicator" # indicates wether GCS score could be acquired, 1==no GCS due to medds
+  urine: "mL" # summed 24 hour
+  temperature: "°C"
+  respiratoryrate: "bpm"
+  heartrate: "bpm"
+  meanbp: "mmHg"
+  wbc: "K/µL"
+  sodium: "mEq/L"
+  ph: ""
+  hematocrit: "%"
+  creatinine: "mg/dL"
+  albumin: "g/dL"
+  pao2: "mmHg"
+  pco2: "mmHg"
+  bun: "mg/dL"
+  glucose: "mg/dL"
+  bilirubin: "mg/dL"
+  fio2: "%"
+
+variables_pretty:
+  intubated: "Intubated"
+  vent: "Ventilated"
+  dialysis: "On Dialysis"
+  eyes: "Eyes GCS"
+  motor: "Motor Response GCS"
+  verbal: "Verbal Response GCS"
+  meds: "Medication Influence on GCS"
+  urine: "24-Hour Urine Output"
+  temperature: "Body Temperature"
+  respiratoryrate: "Respiratory Rate"
+  heartrate: "Heart Rate"
+  meanbp: "Mean Blood Pressure"
+  #wbc: "White Blood Cell Count (WBC)"
+  wbc: "WBC"
+  sodium: "Sodium"
+  ph: "Blood pH"
+  hematocrit: "Hematocrit"
+  creatinine: "Creatinine"
+  albumin: "Albumin"
+  #pao2: "Partial Pressure of Arterial O2 (PaO2)"
+  pao2: "PaO2"
+  #pco2: "Partial Pressure of CO2 (PaCO2)"
+  pco2: "PaCO2"
+  #bun: "Blood Urea Nitrogen (BUN)"
+  bun: "BUN"
+  glucose: "Glucose"
+  bilirubin: "Bilirubin"
+  #fio2: "Fraction of Inspired Oxygen (FiO2)"
+  fio2: "FiO2"
+
+
+
+
+

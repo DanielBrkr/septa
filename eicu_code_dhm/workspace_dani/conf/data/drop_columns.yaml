@@ -1,0 +1,15 @@
+name: "drop_columns"
+
+defaults:
+#  - table: apache_aps_var
+    - /table: respiratory_care
+    - _self_
+
+directories:
+  input_data_dir: tables_basis/2024-06-23
+  data_save_dir: data_cleanup/columns_dropped
+
+settings:
+  # assuming 0 < percentiles < 1
+
+

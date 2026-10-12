@@ -1,0 +1,42 @@
+name: "cohort_b_12h"
+debug: False
+save_on_data_generation: True
+
+metadata:
+  timestamp: ${now:%Y-%m-%d}
+
+directories:
+  cohort: ${hydra:runtime.cwd}/datasets/sepsis_type_b_cohort
+
+paths:
+  static: /home/danielbrkr/digital-icu-deterioration-prediction/eicu_code_dhm/intermediary_data/dataset/sepsis-type-b-cohort/2024-07-24/dataset_static.parquet
+  unsplitted: /home/danielbrkr/digital-icu-deterioration-prediction/eicu_code_dhm/intermediary_data/dataset/sepsis-type-b-cohort/2024-07-24/dataset_ts.parquet
+  aligned_all: aligned_all
+  wo_low_density: wo_low_density
+  splitted: splitted
+  scaled: scaled
+  indexed: indexed
+  df_train: datasets/sepsis_type_b_cohort/indexed/2024-07-17/df_train_indexed_polars.parquet
+  df_val: datasets/sepsis_type_b_cohort/indexed/2024-07-17/df_val_indexed_polars.parquet
+  df_test: datasets/sepsis_type_b_cohort/indexed/2024-07-17/df_test_indexed_polars.parquet
+
+
+imputation_strategy: "median"
+density_threshold: 0.25 # float
+assumed_sepsis_prevalence: 0.1 # float
+input_and_prediction_window_h: 12
+sample_idx_column: "sample_idx_12_h"
+# leave empty if you want to take every available features
+considered_feature_subset_generation:
+#considered_feature_subset_training: ["sao2","heartrate","respiration", "noninvasivesystolic", "st1", "st2", "st3" ]
+considered_feature_subset_training: [ ]
+
+target_column: "sepsis_present"
+ignored_columns: [ ]
+auxillary_columns: [ "patientunitstayid",  "sepsis_patient", "time_offset","sample_idx_12_h" ]
+
+#considered_features_static: ["gender", "age", "ethnicity", "admissionheight", "admissionweight", "diabetes", "immunouppression"]
+#considered_features_static: ["gender", "ethnicity", "diabetes", "immunouppression"]
+considered_features_static_cat: [ "gender", "ethnicity", "diabetes", "immunosuppression" ]
+#considered_features_static_num: [ "age",  "admissionheight", "admissionweight" ]
+considered_features_static_num: [ ]

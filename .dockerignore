@@ -1,0 +1,8 @@
+wandb
+configs
+datasets
+logs
+notebooks
+playground
+# Exclude the project virtual environment from image builds
+.venv

@@ -1,0 +1,35 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "customlab"
+table_name_pretty: "Lab"
+file_name: "custom_lab"
+file_suffix: "regular"
+time_offset_name: "labotheroffset"
+time_delta_column: time_delta_${.file_name}
+
+paths:
+   table_location: intermediary_data/tables_basis/2024-04-07/custom_lab_regular.parquet
+
+metadata:
+   na_equivalent_value: ""
+
+data_type_overrides:
+
+
+# when either lists are empty -> keeping all columns
+dropping_columns: False
+columns_to_drop: []
+columns_to_keep: []
+
+variable_units:
+
+variables_pretty:
+   customlabid: "Custom Lab ID"
+   patientunitstayid: "Patient Unit Stay ID"
+   labotheroffset: "Custom Lab Result Offset"
+   labothertypeid: "Custom Lab Type ID"
+   labothername: "Custom Lab Name"
+   labotherresult: "Custom Lab Result"
+   labotherresulttext: "Custom Lab Result Text"
+
+

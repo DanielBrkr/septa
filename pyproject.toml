@@ -1,0 +1,121 @@
+[project]
+name = "digital-icu-deterioration-prediction"
+version = "0.1.0"
+description = ""
+authors = [{ name = "DaniBrkr", email = "67009081+SmittusWerbus@users.noreply.github.com" }]
+requires-python = ">=3.10,<3.13"
+readme = "README.md"
+dependencies = [
+    "jupyter>=1.0.0,<2",
+    "loguru>=0.7.2,<0.8",
+    "pmdarima>=2.0.4,<3",
+    "sktime>=0.30.0,<0.31",
+    "hvplot>=0.10.0,<0.11",
+    "pyarrow>=16.1.0,<17",
+    "matplotlib>=3.9.0,<4",
+    "seaborn>=0.13.2,<0.14",
+    "hydra-core>=1.3.2,<2",
+    "pandas>=2.2.2,<3",
+    "dask[dataframe]>=2024.6.2,<2025",
+    "polars[all]>=1.2.0,<2",
+    "torch-tb-profiler>=0.4.3,<0.5",
+    "palettable>=3.3.3,<4",
+    "shap>=0.46.0,<0.47",
+    "time-interpret>=0.3.0,<0.4",
+    "torchsampler>=0.1.2,<0.2",
+    "imbalanced-learn>=0.12.3,<0.13",
+    "ray[tune]>=2.33.0,<3",
+    "torchinfo>=1.8.0,<2",
+    "mne>=1.7.1,<2",
+    "squarify>=0.4.4,<0.5",
+    "pywavelets>=1.7.0,<2",
+]
+
+[dependency-groups]
+depends_on_torch = [
+    "torchmetrics>=1.3.1,<2",
+    "lightning>=2.3.3,<3",
+]
+dev = [
+    "ruff>=0.4.9,<0.5",
+    "wandb>=0.17.2,<0.18",
+]
+
+[tool.uv]
+default-groups = [
+    "depends_on_torch",
+    "dev",
+]
+
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Same as Black, but line length changed from 88 to 100.
+line-length = 100
+indent-width = 4
+
+# Assume Python 3.11
+target-version = "py311"
+
+[tool.ruff.lint]
+# Enable  (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+
+select = [
+    "A", # prevents keywords that clobber python builtins
+    "E", # pycdoestyle, some of the style conventions in PEP 8.
+    "F", # Pyflakes, checks for static errors (non-style checks)
+    "N", # flake8-pep8-naming https://docs.astral.sh/ruff/rules/#pep8-naming-n
+    "PTH", # flake8-use-pathlib  https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+    "PD", # pandas-vet (opinionated!) https://docs.astral.sh/ruff/rules/#pandas-vet-pd
+    "ICN", # flake8-import-conventions https://docs.astral.sh/ruff/rules/#flake8-import-conventions-icn
+    "ISC", # implicit string concatenation https://docs.astral.sh/ruff/rules/#flake8-implicit-str-concat-isc
+    "UP", # alert you when better syntax is available in your python version https://docs.astral.sh/ruff/rules/#pyupgrade-up
+    "YTT"   # checks for misuse of `sys.version` or `sys.version_info` https://docs.astral.sh/ruff/rules/#flake8-2020-ytt
+]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"

@@ -1,0 +1,32 @@
+FROM pytorch/pytorch:2.1.2-cuda12.1-cudnn8-runtime
+LABEL authors="danielbreucker"
+
+WORKDIR /home/eicu-code-dhm
+COPY . /home/eicu-code-dhm
+
+
+# SSH Server for remote connection
+RUN apt-get update && apt-get install -y openssh-server && apt-get install -y mc && apt-get install -y nnn \
+    && apt-get install -y graphviz && apt-get install -y sudo && apt-get clean
+
+# Sets the credentials for the SSH connection
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \ && echo "PermitEmptyPasswords yes" >> /etc/ssh/sshd_config \
+   && echo "root:dev" | chpasswd
+# SSH Login Fix for containers k
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+EXPOSE 22
+
+RUN useradd -m danielbrkr && echo "danielbrkr:dev" | chpasswd
+RUN echo "danielbrkr ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+RUN chown danielbrkr /home/eicu-code-dhm
+RUN chsh -s /bin/bash danielbrkr
+
+
+# Workaround due to dunwhich package breaking the "poetry install" command on
+# Use this command in project prior to building
+#poetry export -f requirements.txt --output requirements_pytorch_container.txt --without-hashes --with dev
+#RUN pip install -r requirements_pytorch.txt --no-cache-dir
+
+CMD ["./startup_script.sh"]

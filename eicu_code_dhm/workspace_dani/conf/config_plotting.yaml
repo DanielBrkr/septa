@@ -1,0 +1,19 @@
+debug_mode: True # limits the used used used rows for each table
+draft_mode: False # draft_mode=True doesn't save plot to files
+
+defaults:
+  - _self_
+  - plot: time_series_heatmap
+
+directories:
+  # data is intended to be the directory that contains the parquet files one level below
+#  data: ${hydra:runtime.cwd}/intermediary_data/dataset_assembly/tables_with_time/2024-03-11
+  data: ${hydra:runtime.cwd}/intermediary_data/dataset_assembly/tables_with_time/2024-03-11
+  # plot outputs root is intended to be the dir that contains a subdir for each plot type
+  outputs_root: ${hydra:runtime.cwd}/plot_outputs
+
+hydra:
+  run:
+    dir: hydra/single-run/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: hydra/multi-run/${now:%Y-%m-%d}/${now:%H-%M-%S}

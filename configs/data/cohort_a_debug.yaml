@@ -1,0 +1,37 @@
+name: "cohort_a_debug"
+debug: True
+save_on_data_generation: True
+
+metadata:
+  timestamp: ${now:%Y-%m-%d}
+
+directories:
+  cohort: ${hydra:runtime.cwd}/datasets/sepsis_type_a_cohort
+paths:
+  static: /home/danielbrk/digital-icu-deterioration-prediction/eicu_code_dhm/intermediary_data/dataset/sepsis-type-a-cohort/2024-08-02/dataset_static.parquet
+  unsplitted: /home/danielbrkr/digital-icu-deterioration-prediction/eicu_code_dhm/intermediary_data/dataset_cleaned/sepsis-type-a-cohort/2024-08-02/dataset_ts_cleaned.parquet
+  splitted: splitted
+  aligned_all: aligned_all
+  wo_low_density: wo_low_density
+  scaled: scaled
+  indexed: indexed
+  df_train: datasets/sepsis_type_a_cohort/indexed/2024-07-18/df_train_indexed_polars_debug.parquet
+  df_val: datasets/sepsis_type_a_cohort/indexed/2024-07-18/df_val_indexed_polars_debug.parquet
+  df_test: datasets/sepsis_type_a_cohort/indexed/2024-07-18/df_test_indexed_polars_debug.parquet
+
+
+# leave empty if you want to take every available features
+considered_feature_subset_generation:
+considered_feature_subset_training: [ "temperature", "sao2","heartrate","respiration", "noninvasivesystolic", "st1", "st2", "st3" ]
+
+density_threshold: 0.25 # float
+assumed_sepsis_prevalence: 0.1 # float
+input_and_prediction_window_h: 6
+sample_idx_column: "sample_idx_6_h"
+
+target_column: "sepsis_present"
+ignored_columns: [ ]
+auxillary_columns: ["patientunitstayid", "vitalaperiodicid", "vitalperiodicid", "sepsis_patient", "time_offset","sample_idx_6_h"]
+
+considered_features_static_cat: [ "gender", "ethnicity" ]
+considered_features_static_num: [  ]

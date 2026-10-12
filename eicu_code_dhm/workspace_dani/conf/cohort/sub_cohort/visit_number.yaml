@@ -1,0 +1,8 @@
+name: "visit_number"
+
+source_table: "patient"
+ids_name: included_ids_visit_number
+id_path: visit_number/2024-08-02/included_ids_visit_number.parquet
+
+
+

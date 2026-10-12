@@ -1,0 +1,8 @@
+name: "icu_type_b"
+
+source_table: "patient"
+ids_name: included_ids_icu_type_b
+id_path: icu_type_b/2024-08-02/included_ids_icu_type_b.parquet
+
+
+

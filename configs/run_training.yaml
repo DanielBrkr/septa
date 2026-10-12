@@ -1,0 +1,28 @@
+experiment:
+  author: "Daniel Breucker"
+  experiment_name: "lstm-dense-sparse-prototype"
+  tracked_run: True
+  saving_model: False
+  dev_run: False
+  profiling: False
+  force_cpu: False
+  n_workers: 12
+  run_test: False
+  run_shap: False
+
+defaults:
+  - _self_
+  - data: cohort_b_debug
+  - optimizer: Adam
+  - model: lstm
+
+params:
+  n_epochs: 4
+  batch_size_cpu: 32
+  batch_size_gpu: 64
+
+hydra:
+  run:
+    dir: ${hydra:runtime.cwd}/hydra/single-run/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${hydra:runtime.cwd}/hydra/multi-run/${now:%Y-%m-%d}/${now:%H-%M-%S}

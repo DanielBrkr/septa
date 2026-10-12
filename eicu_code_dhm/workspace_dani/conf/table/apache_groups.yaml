@@ -1,0 +1,31 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "apache_groups"
+table_name_pretty: "APACHE Groups"
+file_name: "apache_groups"
+file_suffix: "regular"
+time_offset_name: ""
+time_delta_column: ""
+
+paths:
+  table_location: intermediary_data/tables_basis/2024-05-27/apache_groups_regular.parquet
+
+metadata:
+  na_equivalent_value: ""
+
+data_type_overrides:
+  apachedxgroup: category
+
+# when either lists are empty -> keeping all columns
+dropping_columns: False
+columns_to_drop: []
+columns_to_keep: []
+
+variable_units:
+  apachedxgroup: ""
+  apacheadmissiondx: ""
+
+variables_pretty:
+  apachedxgroup: "APACHE Diagnosis Group"
+  apacheadmissiondx: "APACHE Admission Diagnosis"
+

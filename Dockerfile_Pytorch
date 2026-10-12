@@ -1,0 +1,76 @@
+# OLD: That's the state from my master's thesis
+FROM pytorch/pytorch:2.2.1-cuda11.8-cudnn8-runtime
+LABEL authors="danielbreucker"
+
+WORKDIR /home/danielbrkr/digital-icu-deterioration-prediction
+COPY . /home/danielbrkr/digital-icu-deterioration-prediction
+
+COPY startup_script.sh /home/danielbrkr/digital-icu-deterioration-prediction
+COPY requirements_pytorch_container.txt /home/danielbrkr/digital-icu-deterioration-prediction
+#COPY requirements_pytorch_container_dep_torch.txt /home/digital-icu-deterioration-prediction
+
+# SSH Server for remote connection
+RUN apt-get update && apt-get install -y openssh-server && apt-get install -y mc && apt-get install -y nnn \
+    && apt-get install -y graphviz && apt-get -y install nvtop && \
+    apt-get install curl git zsh -y && apt-get install -y language-pack-en && \
+    apt-get install texlive-latex-extra texlive-fonts-recommended texlive-science dvipng cm-super && \
+    apt-get install -y sudo &&   apt-get clean
+
+# Sets the credentials for the SSH connection
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \ && echo "PermitEmptyPasswords yes" >> /etc/ssh/sshd_config \
+   && echo "root:dev" | chpasswd
+# SSH Login Fix for containers k
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+EXPOSE 22
+
+RUN useradd -m danielbrkr && echo "danielbrkr:dev" | chpasswd
+RUN echo "danielbrkr ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+RUN chown danielbrkr /home/danielbrkr/digital-icu-deterioration-prediction
+#RUN chsh -s /bin/bash danielbrkr
+RUN chsh -s /bin/bash root
+
+# Install and setup of poetry for dependency management
+ENV POETRY_VERSION=1.5.1
+
+RUN pip install poetry==${POETRY_VERSION}
+RUN poetry --version
+
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
+
+WORKDIR /home/danielbrkr/digital-icu-deterioration-prediction
+
+COPY pyproject.toml /home/danielbrkr/digital-icu-deterioration-prediction
+COPY poetry.lock /home/danielbrkr/digital-icu-deterioration-prediction
+
+#RUN poetry install
+#RUN poetry env info
+
+ENV RUNNING_IN_DOCKER true
+
+RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+RUN sed -i 's/ZSH_THEME=".*"/ZSH_THEME="agnoster"/' /root/.zshrc
+RUN locale-gen en_US.UTF-8 # fix for anon (12): character not in range
+
+# needed to run the scripts from the CLI
+ENV PATH="/opt/conda/bin:$PATH"
+ENV PYTHONPATH=$PYTHONPATH:/home/danielbrkr/digital-icu-deterioration-prediction
+
+# Todo: Use this command in project prior to building
+# Todo: poetry export -f requirements.txt --output requirements_pytorch_container.txt --without-hashes --without depends_on_torch --with dev
+# Todo: poetry export -f requirements.txt --output requirements_pytorch_container.txt --without-hashes  --without depends_on_torch
+
+COPY "/fonts/TUMNeueHelvetica-Regular.ttf" /home/danielbrkr/digital-icu-deterioration-prediction
+RUN install TUMNeueHelvetica-Regular.ttf /usr/share/fonts/truetype/
+
+# Note: You need to remove torch from the requirements when the wrong cuda version pops up
+RUN pip install -r requirements_pytorch_container.txt --upgrade-strategy only-if-needed --no-cache-dir # don't use "--no-cache-dir" slows down build and doesn't decrease img size
+RUN pip install -r requirements_pytorch_container_dep_torch.txt --upgrade-strategy only-if-needed --no-cache-dir
+
+RUN chmod 755 startup_script.sh
+
+CMD ["./startup_script.sh"]

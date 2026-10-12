@@ -1,0 +1,22 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "diagnosis"
+table_name_pretty: "Diagnosis" # "variables" is already included in the title
+file_name: "diagnosis"
+time_offset_name: "diagnosisoffset"
+time_delta_column: "time_delta_diagnosis"
+
+paths:
+  table_location: ${directories.data}/../2024-02-25/diagnosis_regular_2024-03-11.parquet
+
+variable_units:
+  activeupondischarge: "Binary Indicator"
+  diagnosisstring: ""
+  icd9code: "ICD-9 Code"
+  diagnosispriority: "Category" # Picklist Value
+
+variables_pretty:
+  activeupondischarge: "Active Upon Discharge"
+  diagnosisstring: "Diagnosis String"
+  icd9code: "ICD-9 Code"
+  diagnosispriority: "Diagnosis Priority"

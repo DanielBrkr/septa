@@ -1,0 +1,11 @@
+name: "build_dataset"
+
+defaults:
+  - /cohort: sepsis_type_b
+  - _self_
+directories:
+  data_save_dir: dataset
+
+paths:
+  merged_timeseries_tables: merged_tables/${data.cohort.name}/2024-08-02/merged_tables_ts.parquet
+  sepsis_labels: outcome_labels/sepsis/2024-08-02/sepsis_labels_concise_1h_6h_168h.parquet

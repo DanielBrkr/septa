@@ -1,0 +1,11 @@
+architecture: "SAnD"
+
+net:
+  num_layers: 1
+  num_heads: 2
+  d_model: 64
+  factor: 36
+  num_static_hidden: 64
+  num_static_outs: 1
+  dropout: 0.3
+  dropout_static: 0.0

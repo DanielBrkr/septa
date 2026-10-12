@@ -1,0 +1,7 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "sepsis_type_b_cohort_static"
+
+paths:
+  table_location: dataset/sepsis-type-b-cohort/2024-07-26/dataset_static.parquet
+

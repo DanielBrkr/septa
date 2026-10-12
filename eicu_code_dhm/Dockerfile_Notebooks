@@ -1,0 +1,60 @@
+FROM python:3.11-slim-bookworm
+LABEL authors="daniel breucker"
+
+RUN mkdir -p /home/danielbrkr/eicu-code-dhm/remote
+
+WORKDIR /home/danielbrkr/eicu-code-dhm/remote
+
+# SSH Server for remote connection
+RUN apt-get update && apt-get install -y openssh-server && apt-get install -y mc && apt-get install -y nnn \
+    && apt-get install -y graphviz && apt-get install -y sudo && apt-get clean
+
+# Sets the credentials for the SSH connection
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config \ && echo "PermitEmptyPasswords yes" >> /etc/ssh/sshd_config \
+   && echo "root:dev" | chpasswd
+# SSH Login Fix for containers k
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+EXPOSE 22
+
+RUN useradd -m danielbrkr && echo "danielbrkr:dev" | chpasswd
+RUN echo "danielbrkr ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+RUN chown danielbrkr /home/danielbrkr
+RUN chsh -s /bin/bash danielbrkr
+
+# Install and setup of poetry for dependency management
+ENV POETRY_VERSION=1.5.1
+
+RUN pip install poetry==${POETRY_VERSION}
+RUN poetry --version
+
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_CACHE_DIR=/tmp/poetry_cache
+
+WORKDIR /home/danielbrkr/eicu-code-dhm
+#WORKDIR /home/danielbrkr/remote-interpreter
+
+COPY pyproject.toml /home/danielbrkr/eicu-code-dhm
+#COPY pyproject.toml /home/danielbrkr/remote-interpreter
+# poetry.lock speeds up build times by a lot -> no need to resolve dependencies once again
+COPY poetry.lock /home/danielbrkr/eicu-code-dhm
+#COPY poetry.lock /home/danielbrkr/remote-interpreter
+
+RUN poetry install
+RUN poetry env info
+
+WORKDIR /home/danielbrkr/eicu-code-dhm
+
+#COPY "/fonts/TUMNeueHelvetica-Regular.ttf" /home/danielbrkr/eicu_code_dhm/remote
+COPY "/fonts/TUMNeueHelvetica-Regular.ttf" /home/danielbrkr/eicu-code-dhm
+RUN install TUMNeueHelvetica-Regular.ttf /usr/share/fonts/truetype/
+
+# venv python is located at for remote interpreter in pycharm at:
+# /home/danielbrk/eicu_code_dhm/remote/.venv/bin/python3
+
+COPY startup_script.sh /home/danielbrkr/eicu-code-dhm
+
+CMD ["./startup_script.sh"]

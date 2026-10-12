@@ -1,0 +1,173 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "apachepredvar"
+table_name_pretty: "APACHE Prediction" # "variables" is already included in the title
+file_name: "apache_pred_var"
+file_suffix: "regular"
+time_offset_name: ""
+time_delta_column: ""
+
+paths:
+  table_location: intermediary_data/tables_basis/2024-05-27/apache_pred_var_regular.parquet
+
+metadata:
+  na_equivalent_value: -1
+
+data_type_overrides:
+  sicuday: Int8
+  saps3day1: Int8
+  saps3today: Int8
+  saps3yesterday: Int8
+  gender: Int8
+  teachtype: Int8
+  region: Int8
+  bedcount: Int8
+  admitsource: Int8
+  graftcount: Int8
+  meds: Int8
+  verbal: Int8
+  motor: Int8
+  eyes: Int8
+  age: Int8
+  admitdiagnosis: category
+  thrombolytics: category
+  diedinhospital: category
+  aids: category
+  hepaticfailure: category
+  lymphoma: category
+  metastaticcancer: category
+  leukemia: category
+  immunosuppression: category
+  cirrhosis: category
+  electivesurgery: category
+  activetx: category
+  readmit: category
+  ima: category
+  midur: category
+  ventday1: category
+  oobventday1: category
+  oobintubday1: category
+  diabetes: category
+  managementsystem: category
+  dischargelocation: Int8
+  visitnumber: Int8
+  amilocation: Int8
+  day1meds: Int8
+  day1verbal: Int8
+  day1motor: Int8
+  day1eyes: Int8
+
+
+
+# when either lists are empty -> keeping all columns
+dropping_columns: True
+columns_to_drop: [ sicuday,saps3day1,saps3today,saps3yesterday,teachtype,region,admitsource,diedinhospital,dischargelocation,visitnumber,gender,age,managementsystem,var03hspxlos,ventday1,oobventday1,oobintubday1,meds,verbal,motor,eyes,creatinine,pao2,fio2,day1meds,day1verbal,day1motor,day1eyes,day1pao2,day1fio2,admitdiagnosis ]
+columns_to_keep: [ ]
+
+variable_units:
+  sicuday: "Day Count"
+  saps3day1: "Score"
+  saps3today: "Score"
+  saps3yesterday: "Score"
+  gender: "Binary Code"
+  teachtype: ""
+  region: ""
+  bedcount: ""
+  admitsource: "Code"
+  graftcount: "Count"
+  meds: "Binary Indicator"
+  verbal: "GCS Score"
+  motor: "GCS Score"
+  eyes: "GCS Score"
+  age: "Years"
+  admitdiagnosis: "Code"
+  thrombolytics: "Binary Indicator"
+  diedinhospital: "Binary Indicator"
+  aids: "Binary Indicator"
+  hepaticfailure: "Binary Indicator"
+  lymphoma: "Binary Indicator"
+  metastaticcancer: "Binary Indicator"
+  leukemia: "Binary Indicator"
+  immunosuppression: "Binary Indicator"
+  cirrhosis: "Binary Indicator"
+  electivesurgery: "Binary Indicator"
+  activetx: "Binary Indicator"
+  readmit: "Binary Indicator"
+  ima: "Binary Indicator"
+  midur: "Binary Indicator"
+  ventday1: "Binary Indicator"
+  oobventday1: "Binary Indicator"
+  oobintubday1: "Binary Indicator"
+  diabetes: "Binary Indicator"
+  managementsystem: "" # not used actually
+  var03hspxlos: "" # not used actually
+  pao2: "mmHg"
+  fio2: "%"
+  ejectfx: "%"
+  creatinine: "mg/dL"
+  dischargelocation: "Code"
+  visitnumber: "Count"
+  amilocation: "Code"
+  day1meds: "Binary Indicator"
+  day1verbal: "GCS Score"
+  day1motor: "GCS Score"
+  day1eyes: "GCS Score"
+  day1pao2: "mmHg"
+  day1fio2: "%"
+
+variables_pretty:
+  sicuday: "ICU Day Count"
+  saps3day1: "SAPS 3 Score on Day 1"
+  saps3today: "SAPS 3 Score Today"
+  saps3yesterday: "SAPS 3 Score Yesterday"
+  gender: "Gender"
+  teachtype: "Teaching Type"
+  region: "Region"
+  bedcount: "Bed Count"
+  admitsource: "Admit Source"
+  graftcount: "Graft Count"
+  meds: "Medication Influence"
+  verbal: "Verbal Response GCS Score"
+  motor: "Motor Response GCS Score"
+  eyes: "Eyes Opening GCS Score"
+  age: "Age"
+  admitdiagnosis: "Admit Diagnosis"
+  thrombolytics: "Thrombolytics Administration"
+  diedinhospital: "Died in Hospital"
+  aids: "AIDS"
+  hepaticfailure: "Hepatic Failure"
+  lymphoma: "Lymphoma"
+  metastaticcancer: "Metastatic Cancer"
+  leukemia: "Leukemia"
+  immunosuppression: "Immunosuppression"
+  cirrhosis: "Cirrhosis"
+  electivesurgery: "Elective Surgery"
+  activetx: "Active Treatment"
+  readmit: "Readmission"
+  ima: "Internal Mammary Artery Graft"
+  midur: "Myocardial Infarction last 6 Months"
+  ventday1: "Ventilation on Day 1"
+  oobventday1: "Ventilation on Day 1"
+  oobintubday1: "Intubation on Day 1"
+  diabetes: "Diabetes"
+  managementsystem: "Management System" # not used actually
+  var03hspxlos: "var03hspxlos" # not used actually
+  pao2: "Partial Pressure of Arterial Oxygen"
+  fio2: "Fraction of Inspired Oxygen"
+  ejectfx: "Ejection Fraction"
+  creatinine: "Creatinine Level"
+  dischargelocation: "Discharge Location"
+  visitnumber: "Visit Number"
+  amilocation: "Acute Myocardial Infarction Location"
+  day1meds: "Day 1 Medication Influence"
+  day1verbal: "Day 1 Verbal Response GCS Score"
+  day1motor: "Day 1 Motor Response GCS Score"
+  day1eyes: "Day 1 Eyes Opening GCS Score"
+  day1pao2: "Day 1 Partial Pressure of Arterial Oxygen"
+  day1fio2: "Day 1 Fraction of Inspired Oxygen"
+
+
+
+
+
+

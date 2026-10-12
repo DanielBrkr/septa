@@ -1,0 +1,19 @@
+name: "time_series_heatmap"
+
+defaults:
+  - _self_
+  - table: vital_periodic
+
+directories:
+  - plot_save_dir: path
+
+settings:
+  xaxis_label: "Time"
+  yaxis_label: "Patient Unit Stay"
+  title: ""
+  got_timedelta: True
+  target: "heartrate"
+  number_stays: 100
+  limit_hours: 24
+  show_plot: True
+  tum_font_scaling: 1.10

@@ -1,0 +1,61 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "vitalaperiodic"
+table_name_pretty: "Vital Aperiodic"
+file_name: "vital_aperiodic"
+file_suffix: "regular"
+time_offset_name: "observationoffset"
+time_delta_column: time_delta_${.file_name}
+
+paths:
+  table_location: intermediary_data/tables_basis/2024-05-27/vital_aperiodic_regular.parquet
+
+metadata:
+  na_equivalent_value: ""
+
+data_type_overrides:
+  noninvasivesystolic: Float32
+  noninvasivediastolic: Float32
+  noninvasivemean: Float32
+  paop: Float32
+  cardiacoutput: Float32
+  cardiacinput: Float32
+  svr: Float32
+  svri: Float32
+  pvr: Float32
+  pvri: Float32
+
+
+
+# when either lists are empty -> keeping all columns
+dropping_columns: False
+columns_to_drop: []
+columns_to_keep: []
+
+variable_units:
+  noninvasivesystolic: "mmHg"
+  noninvasivediastolic: "mmHg"
+  noninvasivemean: "mmHg"
+  paop: "mmHg"
+  cardiacoutput: "L/min"
+  cardiacinput: "L/min"
+  svr: "Dyn·s/cm^5"
+  svri: "Dyn·s/cm^5/m^2"
+  pvr: "Dyn·s/cm^5"
+  pvri: "Dyn·s/cm^5/m^2"
+
+
+variables_pretty:
+  noninvasivesystolic: "Non-Invasive Systolic BP"
+  noninvasivediastolic: "Non-Invasive Diastolic BP"
+  noninvasivemean: "Non-Invasive Mean BP"
+  paop: "Pulmonary Artery Occlusion Pressure"
+  cardiacoutput: "Cardiac Output"
+  cardiacinput: "Cardiac Input"
+  svr: "Systemic Vascular Resistance"
+  svri: "Systemic Vascular Resistance Index"
+  pvr: "Peripheral Vascular Resistance"
+  pvri: "Peripheral Vascular Resistance Index"
+
+
+

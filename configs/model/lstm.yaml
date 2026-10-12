@@ -1,0 +1,11 @@
+architecture: "LSTM"
+
+net:
+  num_layers: 2
+  num_hidden_size: 128
+  num_ts_out: 8
+  num_static_hidden: 2
+  num_static_outs: 64
+  num_classifier_head_hidden: 64
+  dropout: 0.2
+  dropout_static: 0.5

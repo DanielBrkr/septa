@@ -1,0 +1,16 @@
+name: "sepsis-type-a-cohort"
+
+defaults:
+  - /table: respiratory_care
+  - sub_cohort/admit_source@sub_cohort.admit_source
+  - sub_cohort/discharge_offset@sub_cohort.discharge_offset
+  - sub_cohort/icu_type_a@sub_cohort.icu_type_a
+  - sub_cohort/valid_apache@sub_cohort.valid_apache
+  - sub_cohort/visit_number@sub_cohort.visit_number
+
+directories:
+  input_data_dir: data_cleanup/basic_cleanup/2024-08-02
+  data_save_dir: cohorted/sepsis-type-a-cohort
+
+sepsis_to_exclude_path: patient_unit_stay_ids/cohorts/sepsis/excluded_ids_sepsis_1h_6h_168h.parquet
+

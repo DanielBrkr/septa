@@ -1,0 +1,80 @@
+# This is the setup if the minio db is already up and running
+# 1. docker compose --env-file ./mlflow_pg_config.env build
+# 2. docker compose --env-file ./mlflow_pg_config.env up
+name: "mlflow-app-postgres"
+version: "3.9"
+
+services:
+  db:
+    restart: unless-stopped
+    image: postgres:16.2-bookworm
+    container_name: mlflow-db-standalone
+    ports:
+      - "${PG_PORT}:5432"
+    networks:
+      - mlflow-shared-network
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DATABASE=${PG_DATABASE}
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./mlflow-postgres-data:/var/lib/postgresql/data/
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-p", "${PG_PORT}", "-U", "${PG_USER}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 8G
+        reservations:
+          cpus: "1"
+          memory: 4G
+
+  tracking_server:
+    restart: unless-stopped
+    build: ../mlflow-app-image
+    image: mlflow-server
+    container_name: mlflow-server-standalone
+    depends_on:
+      - db
+    ports:
+      - "${MLFLOW_PORT}:5000"
+    networks:
+      - mlflow-shared-network
+    environment:
+      - AWS_ACCESS_KEY_ID=${MINIO_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_SECRET_ACCESS_KEY}
+      - MLFLOW_S3_ENDPOINT_URL=${MLFLOW_S3_ENDPOINT_URL}
+      - MLFLOW_S3_IGNORE_TLS=true
+      - MLFLOW_BACKEND_STORE_URI="postgresql://${PG_USER}:${PG_PASSWORD}@db:${PG_PORT}/${PG_DATABASE}"
+      - MLFLOW_ARTIFACTS_DESTINATION=${ARTIFACT_DESTINATION}
+    command: >
+      mlflow server
+      --backend-store-uri postgresql://${PG_USER}:${PG_PASSWORD}@db:5432/${PG_DATABASE}
+      --host 0.0.0.0
+      --serve-artifacts
+      --artifacts-destination ${ARTIFACT_DESTINATION}
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:${MLFLOW_PORT}/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4G
+        reservations:
+          cpus: "1"
+          memory: 2G
+
+volumes:
+  mlflow-postgres-data:
+
+networks:
+  mlflow-shared-network:
+    external: True

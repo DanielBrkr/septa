@@ -1,0 +1,25 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "lab"
+table_name_pretty: "Lab"
+file_name: "lab"
+time_offset_name: "labresultoffset"
+time_delta_column: time_delta_${.file_name}
+
+paths:
+  table_location: ${directories.data}/lab_regular_2024-03-11.parquet
+
+
+variables_pretty:
+  labid: "Lab ID"
+  patientunitstayid: "Patient Unit Stay ID"
+  labresultoffset: "Lab Result Offset"
+  labtypeid: "Lab Type ID"
+  labname: "Lab Name"
+  labresult: "Lab Result"
+  labresulttext: "Lab Result Text"
+  labmeasurenamesystem: "Lab Measure Name System"
+  labmeasurenameinterface: "Lab Measure Name Interface"
+  labresultrevisedoffset: "Lab Result Revised Offset"
+
+

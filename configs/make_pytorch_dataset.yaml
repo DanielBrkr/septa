@@ -1,0 +1,6 @@
+defaults:
+  - _self_
+  - data: cohort_b_debug
+
+use_polars: True # 10 x speed up compared to pandas
+dataset_name_postfix: ""

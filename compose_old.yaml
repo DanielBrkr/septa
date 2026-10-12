@@ -1,0 +1,83 @@
+name: thesis-pytorch-dev # change this is you want to have different compose stacks
+services:
+
+  pytorch-dev:
+    container_name: dani-thesis-pytorch-dev
+    build:
+      dockerfile: Dockerfile_Pytorch
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WANDB_API_KEY=${WANDB_API_KEY}
+      - WANDB_CONSOLE=off
+    volumes:
+      - .:/home/danielbrkr/digital-icu-deterioration-prediction
+    ports:
+      - "8887:8888"
+      - "5998:22"
+    shm_size: "2gb"
+    deploy:
+      resources:
+        limits:
+          cpus: "12"
+          memory: 128G
+        reservations:
+          cpus: "8"
+          memory: 64G
+          devices:
+            - driver: nvidia
+              count: 2
+              capabilities: [ gpu ]
+
+  pytorch-dev-ca:
+    container_name: dani-thesis-pytorch-dev-cohort-a
+    build:
+      dockerfile: Dockerfile_Pytorch
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WANDB_API_KEY=${WANDB_API_KEY}
+      - WANDB_CONSOLE=off
+    volumes:
+      - .:/home/danielbrkr/digital-icu-deterioration-prediction
+    ports:
+      - "8886:8888"
+      - "5997:22"
+    shm_size: "2gb"
+    deploy:
+      resources:
+        limits:
+          cpus: "24"
+          memory: 400G
+        reservations:
+          cpus: "12"
+          memory: 256G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  pytorch-dev-cb:
+    container_name: dani-thesis-pytorch-dev-cohort-b
+    build:
+      dockerfile: Dockerfile_Pytorch
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WANDB_API_KEY=${WANDB_API_KEY}
+      - WANDB_CONSOLE=off
+    volumes:
+      - .:/home/danielbrkr/digital-icu-deterioration-prediction
+    ports:
+      - "8885:8888"
+      - "5996:22"
+    shm_size: "2gb"
+    deploy:
+      resources:
+        limits:
+          cpus: "12"
+          memory: 128G
+        reservations:
+          cpus: "8"
+          memory: 64G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]

@@ -1,0 +1,12 @@
+name: "generate_cohort_ids"
+
+defaults:
+  - /cohort/sub_cohort: admit_source
+
+
+directories:
+  input_data_dir: data_cleanup/basic_cleanup/2024-08-02
+  data_save_dir: patient_unit_stay_ids/cohorts
+
+#sepsis_to_exclude_path: patient_unit_stay_ids/cohorts/sepsis/excluded_ids_sepsis_1h_6h_168h.parquet
+

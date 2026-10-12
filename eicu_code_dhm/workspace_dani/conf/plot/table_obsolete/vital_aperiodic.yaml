@@ -1,0 +1,38 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "vitalaperiodic"
+table_name_pretty: "Vital Aperiodic"
+file_name: "vital_aperiodic"
+time_offset_name: "observationoffset"
+time_delta_column: time_delta_${.file_name}
+
+paths:
+  table_location: ${directories.data}/vital_aperiodic_half_precision_2024-03-11.parquet
+
+
+variable_units:
+  noninvasivesystolic: "mmHg"
+  noninvasivediastolic: "mmHg"
+  noninvasivemean: "mmHg"
+  paop: "mmHg"
+  cardiacoutput: "L/min"
+  cardiacinput: "L/min"
+  svr: "Dyn·s/cm^5"
+  svri: "Dyn·s/cm^5/m^2"
+  pvr: "Dyn·s/cm^5"
+  pvri: "Dyn·s/cm^5/m^2"
+
+
+variables_pretty:
+  noninvasivesystolic: "Non-Invasive Systolic BP"
+  noninvasivediastolic: "Non-Invasive Diastolic BP"
+  noninvasivemean: "Non-Invasive Mean BP"
+  paop: "Pulmonary Artery Occlusion Pressure"
+  cardiacoutput: "Cardiac Output"
+  cardiacinput: "Cardiac Input"
+  svr: "Systemic Vascular Resistance"
+  svri: "Systemic Vascular Resistance Index"
+  pvr: "Peripheral Vascular Resistance"
+  pvri: "Peripheral Vascular Resistance Index"
+
+

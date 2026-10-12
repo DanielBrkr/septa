@@ -1,0 +1,11 @@
+name: "discharge_offset"
+
+discharge_lower_bound: 6
+discharge_upper_bound: 168
+
+source_table: "patient"
+ids_name: included_ids_unit_discharge_offset
+id_path:  discharge_offset/2024-08-02/included_ids_unit_discharge_offset.parquet
+
+
+

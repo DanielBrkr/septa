@@ -1,0 +1,4 @@
+dataset_name: "initial_setup_ds"
+paths:
+  #  data_dir: ${paths.data_dir}
+  dataset_path: ${hydra:runtime.cwd}/datasets/raw_and_shitty/dataset_ts.parquet

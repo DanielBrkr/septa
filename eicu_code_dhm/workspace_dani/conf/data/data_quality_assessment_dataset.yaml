@@ -1,0 +1,18 @@
+which_stage: "dataset" # either pre_cleanup, post_cleanup, dataset
+yd_tsmode: False
+
+defaults:
+  - /dataset: sepsis_type_b_cohort_time_series
+  - _self_
+
+directories:
+  pre_clean_up_input_data_dir: tables_basis/2024-06-23
+  post_clean_up_input_data_dir: data_cleanup/basic_cleanup/2024-08-02
+  # adjust this dir accordingly
+  data_save_dir: data_quality/${metadata.timestamp}/dataset
+
+settings:
+  # assuming 0 < percentiles < 1
+  percentiles: [ 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.25, .5, .75, 0.99, 0.999, 0.9999, 0.99999, 0.999999 ]
+
+

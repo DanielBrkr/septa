@@ -1,0 +1,42 @@
+name: "cohort_a"
+debug: False
+save_on_data_generation: True
+
+metadata:
+  timestamp: ${now:%Y-%m-%d}
+
+directories:
+  cohort: ${hydra:runtime.cwd}/datasets/sepsis_type_a_cohort
+
+paths:
+
+  static: /home/danielbrkr/digital-icu-deterioration-prediction/eicu_code_dhm/intermediary_data/dataset/sepsis-type-a-cohort/2024-08-02/dataset_static.parquet
+  unsplitted: /home/danielbrkr/digital-icu-deterioration-prediction/eicu_code_dhm/intermediary_data/dataset_cleaned/sepsis-type-a-cohort/2024-08-02/dataset_ts_cleaned.parquet
+  aligned_all: aligned_all
+  wo_low_density: wo_low_density
+  splitted: splitted
+  scaled: scaled
+  indexed: indexed
+  df_train: /home/danielbrkr/digital-icu-deterioration-prediction/datasets/sepsis_type_a_cohort/indexed/2024-08-02/df_train_indexed_6_h_dens_0.75_sep_prev_0.1_imp_none.parquet
+  df_val: /home/danielbrkr/digital-icu-deterioration-prediction/datasets/sepsis_type_a_cohort/indexed/2024-08-02/df_train_indexed_6_h_dens_0.75_sep_prev_0.1_imp_none.parquet
+  df_test: /home/danielbrkr/digital-icu-deterioration-prediction/datasets/sepsis_type_a_cohort/indexed/2024-08-02/df_train_indexed_6_h_dens_0.75_sep_prev_0.1_imp_none.parquet
+
+imputation_strategy: "none"
+density_threshold: 0.75 # float
+assumed_sepsis_prevalence: 0.1 # float
+input_and_prediction_window_h: 6
+sample_idx_column: "sample_idx_6_h"
+# leave empty if you want to take every available features
+considered_feature_subset_generation:
+#considered_feature_subset_training: ["sao2","heartrate","respiration", "noninvasivesystolic", "st1", "st2", "st3" ]
+considered_feature_subset_training: [ ]
+
+target_column: "sepsis_sample_shifted"
+ignored_columns: [ ]
+#auxillary_columns: [ "vitalperiodicid", "vitalaperiodicid",
+auxillary_columns: [
+  "patientunitstayid", "sepsis_patient", "time_offset","sample_idx_6_h", "sepsis_present", "sepsis_sample" ]
+
+considered_features_static_cat: [ "gender", "aids", "hepaticfailure", "lymphoma", "metastaticcancer", "leukemia","immunosuppression", "cirrhosis", "diabetes" ]
+#considered_features_static_cat: [ "aids", "hepaticfailure", "lymphoma", "metastaticcancer", "leukemia","immunosuppression", "cirrhosis", "diabetes" ]
+considered_features_static_num: [ "admissionweight", "admissionheight", "age" ]

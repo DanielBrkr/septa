@@ -1,0 +1,13 @@
+architecture: "GTN"
+
+net:
+  num_layers: 1
+  num_heads: 8
+  d_model: 64
+  d_hidden: 128
+  bottleneck_factor: 3
+  num_static_hidden: 128
+  num_static_outs: 16
+  num_classifier_head_hidden: 32
+  dropout: 0.2
+  dropout_static: 0.4

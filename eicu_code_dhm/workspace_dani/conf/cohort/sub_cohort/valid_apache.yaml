@@ -1,0 +1,7 @@
+name: "valid_apache_prediction"
+
+source_table: "apache_patient_results"
+ids_name: included_ids_valid_apache_prediction
+id_path: valid_apache_prediction/2024-08-02/included_ids_valid_apache_prediction.parquet
+
+

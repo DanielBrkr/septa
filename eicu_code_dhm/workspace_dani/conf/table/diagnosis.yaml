@@ -1,0 +1,38 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "diagnosis"
+table_name_pretty: "Diagnosis" # "variables" is already included in the title
+file_name: "diagnosis"
+file_suffix: "regular"
+time_offset_name: "diagnosisoffset"
+#time_delta_column: "time_delta_diagnosis"
+time_delta_column: ""
+
+paths:
+  table_location: intermediary_data/tables_basis/2024-05-27/diagnosis_regular.parquet
+
+metadata:
+  na_equivalent_value: ""
+
+data_type_overrides:
+  diagnosisstring: string
+  icd9code: category
+  diagnosispriority: category
+
+
+# when either lists are empty -> keeping all columns
+dropping_columns: False
+columns_to_drop: []
+columns_to_keep: []
+
+variable_units:
+  activeupondischarge: "Binary Indicator"
+  diagnosisstring: ""
+  icd9code: "ICD-9 Code"
+  diagnosispriority: "Category" # Picklist Value
+
+variables_pretty:
+  activeupondischarge: "Active Upon Discharge"
+  diagnosisstring: "Diagnosis String"
+  icd9code: "ICD-9 Code"
+  diagnosispriority: "Diagnosis Priority"

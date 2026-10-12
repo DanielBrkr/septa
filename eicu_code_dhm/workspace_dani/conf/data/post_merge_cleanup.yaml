@@ -1,0 +1,91 @@
+name: "dataset_cleanup"
+
+defaults:
+  - /cohort: sepsis_type_b
+  - _self_
+directories:
+  data_save_dir: dataset_cleaned
+
+paths:
+#  dataset_raw: merged_tables/${data.cohort.name}/2024-07-24/merged_tables_ts.parquet
+  dataset_raw: dataset/${data.cohort.name}/2024-08-02/dataset_ts.parquet
+#  sepsis_labels: outcome_labels/sepsis/2024-06-22/sepsis_labels_concise_1h_6h_168h.parquet
+
+cleanup:
+  variable_count_threshold: 15000
+  aux_columns_to_drop: ["vitalaperiodicid", "vitalperiodicid" ]
+  reduce_to_cohort_b_columns: True
+  valid_columns_from_cohort_b:
+    - patientunitstayid
+    - time_offset
+    - noninvasivesystolic
+    - noninvasivediastolic
+    - noninvasivemean
+    - cardiacoutput
+    - cardiacinput
+    - svr
+    - temperature
+    - sao2
+    - heartrate
+    - respiration
+    - cvp
+    - etco2
+    - systemicsystolic
+    - systemicdiastolic
+    - systemicmean
+    - pasystolic
+    - padiastolic
+    - pamean
+    - st1
+    - st2
+    - st3
+    - icp
+    - labname_-basos
+    - labname_-eos
+    - labname_-lymphs
+    - labname_-monos
+    - labname_-polys
+    - labname_ALT (SGPT)
+    - labname_AST (SGOT)
+    - labname_BUN
+    - labname_Base Excess
+    - labname_CPK
+    - labname_FiO2
+    - labname_HCO3
+    - labname_Hct
+    - labname_Hgb
+    - labname_MCH
+    - labname_MCHC
+    - labname_MCV
+    - labname_MPV
+    - labname_O2 Sat (%)
+    - labname_PT
+    - labname_PT - INR
+    - labname_PTT
+    - labname_RBC
+    - labname_RDW
+    - labname_Total CO2
+    - labname_WBC x 1000
+    - labname_albumin
+    - labname_alkaline phos.
+    - labname_anion gap
+    - labname_bedside glucose
+    - labname_bicarbonate
+    - labname_calcium
+    - labname_chloride
+    - labname_creatinine
+    - labname_glucose
+    - labname_lactate
+    - labname_magnesium
+    - labname_pH
+    - labname_paCO2
+    - labname_paO2
+    - labname_phosphate
+    - labname_platelets x 1000
+    - labname_potassium
+    - labname_sodium
+    - labname_total bilirubin
+    - labname_total protein
+    - labname_troponin - I
+    - sepsis_patient
+    - sepsis_present

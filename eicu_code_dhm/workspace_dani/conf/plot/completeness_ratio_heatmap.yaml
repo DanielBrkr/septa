@@ -1,0 +1,24 @@
+name: "completeness_ratio_heatmap"
+
+defaults:
+  - _self_
+  - table: vital_periodic
+
+
+directories:
+  - plot_save_dir: path
+
+settings:
+  xaxis_label: "Variables"
+  yaxis_label: "Patient Unit Stays"
+  zaxis_label: "Completeness Ratio"
+  title: ""
+  show_plot: True
+  #tum_font_scaling: 1.10
+  tum_font_scaling: 1.0
+  tick_font_scale: 10
+  label_font_scale: 10
+  title_font_scale: 10
+  figure_width_cm: 15
+  figure_height_cm: 15
+  resolution_dpi: 600

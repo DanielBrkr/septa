@@ -1,0 +1,32 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "intakeoutput"
+table_name_pretty: "Intake Output" # "variables" is already included in the title
+file_name: "intake_output"
+time_offset_name: "intakeoutputoffset"
+time_delta_column: "time_delta_intake_output"
+
+paths:
+  table_location: ${directories.data}/intake_output_regular_2024-03-11.parquet
+
+variable_units:
+  intaketotal: "mL"
+  outputtotal: "mL"
+  dialysistotal: "mL"
+  nettotal: "mL"
+  intakeoutputentryoffset: "Minutes" # Not actually used by us, we use the column with the observation
+  cellpath: ""
+  celllabel: ""
+  cellvaluenumeric: "mL"
+  cellvaluetext: ""
+
+variables_pretty:
+  intaketotal: "Total Intake"
+  outputtotal: "Total Output"
+  dialysistotal: "Total Dialysis Output"
+  nettotal: "Net Total"
+  intakeoutputentryoffset: "Intake and Output Entry Offset"
+  cellpath: "Cell Path"
+  celllabel: "Cell Label"
+  cellvaluenumeric: "Cell Value Numeric"
+  cellvaluetext: "Cell Value Text"

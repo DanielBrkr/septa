@@ -1,0 +1,14 @@
+name: "sepsis_labels_concise"
+
+interval: "1h"
+inclusion_bound_lower_h: 6
+inclusion_bound_upper_h: 168
+
+defaults:
+  - _self_
+directories:
+  data_save_dir: outcome_labels/sepsis
+  patient_ids: patient_unit_stay_ids/cohorts/sepsis
+
+paths:
+  sepsis_table: outcome_labels/sepsis/valid/sepsis_data_1h.parquet

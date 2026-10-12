@@ -1,0 +1,58 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "apachepatientresult"
+table_name_pretty: "APACHE Patient Results" # "variables" is already included in the title
+file_name: "apache_patient_results"
+time_offset_name: ""
+time_delta_column: ""
+
+paths:
+  table_location: ${directories.data}/apache_patient_results_regular_2024-03-11.parquet
+
+variable_units:
+  physicianspeciality: "Picklist Value"
+  physicianinterventioncategory: "Picklist Value"
+  acutephysiologyscore: "Score"
+  apachescore: "Score"
+  apacheversion: "Version Number"
+  predictedicumortality: "Percentage"
+  actualicumortality: "Percentage"
+  predictediculos: "Days"
+  actualiculos: "Days"
+  predictedhospitalmortality: "Percentage"
+  actualhospitalmortality: "Category"
+  predictedhospitallos: "Days"
+  actualhospitallos: "Days"
+  preopmi: "Binary Indicator"
+  preopcardiaccath: "Binary Indicator"
+  ptcawithin24h: "Binary Indicator" # # Percutaneous Transluminal Coronary Angioplasty
+  unabridgedunitlos: "Days"
+  unabridgedhosplos: "Days"
+  actualventdays: "Days"
+  predventdays: "Days"
+  unabridgedactualventdays: "Days"
+
+variables_pretty:
+  physicianspeciality: "Physician Specialty"
+  physicianinterventioncategory: "Physician Intervention Category"
+  acutephysiologyscore: "Acute Physiology Score"
+  apachescore: "APACHE Score"
+  apacheversion: "APACHE Version"
+  predictedicumortality: "Predicted ICU Mortality"
+  actualicumortality: "Actual ICU Mortality"
+  predictediculos: "Predicted ICU Length of Stay"
+  actualiculos: "Actual ICU Length of Stay"
+  predictedhospitalmortality: "Predicted Hospital Mortality"
+  actualhospitalmortality: "Actual Hospital Mortality"
+  predictedhospitallos: "Predicted Hospital Length of Stay"
+  actualhospitallos: "Actual Hospital Length of Stay"
+  preopmi: "Preoperative Myocardial Infarction"
+  preopcardiaccath: "Preoperative Cardiac Catheterization"
+  ptcawithin24h: "PTCA Within 24 Hours" # Percutaneous Transluminal Coronary Angioplasty
+  unabridgedunitlos: "Unabridged Unit Length of Stay"
+  unabridgedhosplos: "Unabridged Hospital Length of Stay"
+  actualventdays: "Actual Ventilation Days"
+  predventdays: "Predicted Ventilation Days"
+  unabridgedactualventdays: "Unabridged Actual Ventilation Days"
+
+

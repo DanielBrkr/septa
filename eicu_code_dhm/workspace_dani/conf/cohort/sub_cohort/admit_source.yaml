@@ -1,0 +1,9 @@
+name: "admit_source"
+
+source_table: "patient"
+ids_name: included_ids_admit_source
+
+id_path: admit_source/2024-08-02/included_ids_admit_source.parquet
+
+
+

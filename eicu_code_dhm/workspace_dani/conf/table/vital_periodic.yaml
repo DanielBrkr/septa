@@ -1,0 +1,76 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "vitalperiodic"
+table_name_pretty: "Vital Periodic"
+file_name: "vital_periodic"
+file_suffix: "regular"
+time_offset_name: "observationoffset"
+#time_delta_column: time_delta_${.file_name}
+time_delta_column: ""
+
+paths:
+   table_location: intermediary_data/tables_basis/2024-05-27/vital_periodic_regular.parquet
+
+metadata:
+   na_equivalent_value: ""
+
+data_type_overrides:
+   temperature: "Float32"
+   sao2: "Int32"
+   heartrate: "Int32"
+   respiration: "Int32"
+   cvp: "Int32"
+   etco2: "Int32"
+   systemicsystolic: "Int32"
+   systemicdiastolic: "Int32"
+   pasystolic: "Int32"
+   padiastolic: "Int32"
+   pamean: "Int32"
+   icp: "Int32"
+
+
+# when either lists are empty -> keeping all columns
+dropping_columns: False
+columns_to_drop: []
+columns_to_keep: []
+
+variable_units:
+   temperature: "°C"
+   sao2: "%"
+   heartrate: "bpm"
+   respiration: "bpm"
+   #cvp: "mmHg" # not sure if it's really mmHg since the normal range is roughly 100, example of eICU are given in 300
+   cvp: "mmHg"
+   etco2: "mmHg"
+   systemicsystolic: "mmHg"
+   systemicdiastolic: "mmHg"
+   systemicmean: "mmHg"
+   pasystolic: "mmHg"
+   padiastolic: "mmHg"
+   pamean: "mmHg"
+   st1: "mV"
+   st2: "mV"
+   st3: "mV"
+   icp: "mmHg"
+
+
+variables_pretty:
+   temperature: "Temperature"
+   sao2: "Peripheral Oxygen Saturation" # is actually spO2 see "important considerations": https://eicu-crd.mit.edu/eicutables/vitalperiodic/
+   heartrate: "Heart Rate"
+   respiration: "Respiration Rate"
+   cvp: "Central Venous Pressure"
+   etco2: "End-Tidal CO2"
+   systemicsystolic: "Systemic Systolic Invasiv BP"
+   systemicdiastolic: "Systemic Diastolic Invasiv BP"
+   systemicmean: "Systemic Mean Invasiv BP"
+   pasystolic: "Pulmonary Artery Systolic Pressure"
+   padiastolic: "Pulmonary Artery Diastolic Pressure"
+   pamean: "Pulmonary Artery Mean Pressure"
+   st1: "ST Segment 1"
+   st2: "ST Segment 2"
+   st3: "ST Segment 3"
+   icp: "Intracranial Pressure"
+
+
+

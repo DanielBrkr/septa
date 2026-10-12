@@ -1,0 +1,5 @@
+type: "Adam"
+params:
+  learning_rate: 0.00193
+  weight_decay:  0.00887
+

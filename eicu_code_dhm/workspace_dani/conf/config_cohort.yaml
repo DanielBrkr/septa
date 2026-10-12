@@ -1,0 +1,23 @@
+debug_mode: True # limits the used used used rows for each table
+draft_mode: True # draft_mode=True doesn't save to files
+
+defaults:
+  - _self_
+  - cohort: sepsis_type_b
+
+metadata:
+  timestamp: ${now:%Y-%m-%d}
+
+directories:
+  # data is intended to be the directory that contains the parquet files one level below
+  data: ${hydra:runtime.cwd}
+  ids: intermediary_data/patient_unit_stay_ids/cohorts
+  # plot outputs root is intended to be the dir that contains a subdir for each plot type
+  outputs_root: ${hydra:runtime.cwd}/intermediary_data/
+
+
+hydra:
+  run:
+    dir: hydra/single-run/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: hydra/multi-run/${now:%Y-%m-%d}/${now:%H-%M-%S}

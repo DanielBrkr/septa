@@ -1,0 +1,29 @@
+name: "merge_tables"
+
+defaults:
+  - /cohort: sepsis_type_b
+  - _self_
+directories:
+  input_data_dir: cohorted/${data.cohort.name}/2024-08-02
+  #input_consolidated_data_dir: cohorted/${data.cohort.name}/2024-07-23/consolidated/sepsis-type-a-cohort/2024-07-23 # this is propor jank but takes to too long to set it up properly
+  data_save_dir: merged_tables
+#  data_save_dir: dataset
+  data_save_dir_static_data: dataset
+
+
+used_tables:
+  categorical_tables: [
+    "apache_patient_results.parquet",
+    "patient.parquet",
+    "apache_pred_var.parquet"]
+  timeseries_tables: [
+    "vital_aperiodic.parquet",
+    "vital_periodic.parquet",
+  ]
+  lab_consolidated : "../consolidated/2024-08-02/lab.parquet"
+  hybrid_timeseries_tables: [
+    #"diagnosis.parquet", # Categorical Data in a TS manner
+    #"lab.parquet", # Categorical Data in a TS manner
+    # Note: This is actually the "consolidated" version of lab, as the script expects the regular table names
+    # you have to move it by hand from the consolidated dir to cohorted
+  ]

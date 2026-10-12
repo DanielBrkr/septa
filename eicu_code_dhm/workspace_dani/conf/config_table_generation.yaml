@@ -1,0 +1,31 @@
+directories:
+  data: ${hydra:runtime.cwd}/intermediary_data # : -> . jupyter notebook "HydraConfig was not set" workaround
+  ids: ${hydra:runtime.cwd}/intermediary_data/patient_unit_stay_ids/cohorts/valid_apache
+  tables: ${hydra:runtime.cwd}/intermediary_data/tables_basis/tables
+  save: ${hydra:runtime.cwd}/intermediary_data/tables_basis
+
+metadata:
+  timestamp: ${now:%Y-%m-%d}
+
+files:
+  id_file: valid_ids_from_apache.pkl
+
+row_limit: 10000
+# provide the table names with an underscore between the words, e.g. vitalperiodic -> vital_periodic
+defaults:
+  - _self_
+  - table: "apache_aps_var"
+
+db_url: "postgres://eicu:eicu@localhost:6432/eicu"
+
+data_type_backend: "numpy_nullable"
+#data_type_backend: "pyarrow"
+enable_data_type_overrides: True
+
+
+
+hydra:
+  run:
+    dir: hydra/single-run/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: hydra/multi-run/${now:%Y-%m-%d}/${now:%H-%M-%S}

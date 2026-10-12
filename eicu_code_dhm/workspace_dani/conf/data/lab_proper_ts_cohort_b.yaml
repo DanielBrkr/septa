@@ -1,0 +1,10 @@
+name: "lab_proper_ts_cohort_b"
+
+defaults:
+  - /cohort: sepsis_type_b
+
+directories:
+  input_data_dir: cohorted/sepsis-type-b-cohort/2024-07-25
+  data_save_dir: cohorted/sepsis-type-b-cohort/consolidated
+
+

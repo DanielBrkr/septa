@@ -1,0 +1,34 @@
+# OLD: That's the state from my master's thesis
+name: masters-icu-pytorch-dev # change this is you want to have different compose stacks
+services:
+  pytorch-dev:
+    container_name: dani-masters-icu
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONUNBUFFERED=1
+#      - WANDB_API_KEY=${WANDB_API_KEY}
+#      - WANDB_CONSOLE=off
+    volumes:
+      - .:/home/breucker/digital-icu-deterioration-prediction
+    ports:
+      - "8887:8888"
+      - "5998:22"
+    stdin_open: true
+    tty: true
+    user: "2072:1111" # adjust!
+    userns_mode: keep-id
+    shm_size: "2gb"
+    deploy:
+      resources:
+        limits:
+          cpus: "12"
+          memory: 128G
+        reservations:
+          cpus: "8"
+          memory: 64G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]

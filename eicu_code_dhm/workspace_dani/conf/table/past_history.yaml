@@ -1,0 +1,40 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "pasthistory"
+table_name_pretty: "Past History" # "variables" is already included in the title
+file_name: "past_history"
+file_suffix: "regular"
+time_offset_name: "pasthistoryoffset"
+time_delta_column: "time_delta_past_history"
+
+paths:
+   table_location: intermediary_data/tables_basis/2024-05-27/past_history_regular.parquet
+
+metadata:
+   na_equivalent_value: ""
+
+data_type_overrides:
+   pasthistorynotetype: category
+   pasthistorypath: category
+   #pasthistoryvalue: string
+   pasthistoryvalue: category
+   #pasthistoryvaluetext: string
+   pasthistoryvaluetext: category
+
+
+# when either lists are empty -> keeping all columns
+dropping_columns: False
+columns_to_drop: []
+columns_to_keep: []
+
+variable_units:
+   pasthistorynotetype: ""
+   pasthistorypath: ""
+   pasthistoryvalue: ""
+   pasthistoryvaluetext: ""
+
+variables_pretty:
+   pasthistorynotetype: "Past History Note Type"
+   pasthistorypath: "Past History Path"
+   pasthistoryvalue: "Past History Value"
+   pasthistoryvaluetext: "Past History Value Text"

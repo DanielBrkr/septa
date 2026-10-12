@@ -1,0 +1,110 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "patient"
+table_name_pretty: "Patient" # "variables" is already included in the title
+file_name: "patient"
+file_suffix: "regular"
+#time_offset_name: "hospitaladmitoffset"
+time_offset_name: ""
+time_delta_column: "time_delta_patient"
+
+paths:
+  table_location: intermediary_data/tables_basis/2024-05-27/patient_regular.parquet
+
+metadata:
+  na_equivalent_value: 0.0
+
+data_type_overrides:
+  #gender: 'category'
+  age: 'string'  # Keeping age as string due to potential non-numeric values like "Unknown", "<1", etc.
+  #ethnicity: 'category'
+  hospitalid: 'Int32'
+  wardid: 'Int32'
+  apacheadmissiondx: 'string'
+  admissionheight: 'Float64'
+  hospitaladmittime24: 'string'
+  hospitaladmitsource: 'string'
+  hospitaldischargeyear: 'Int16'
+  hospitaldischargetime24: 'string'
+  hospitaldischargeoffset: 'Int32'
+  hospitaldischargelocation: 'string'
+  hospitaldischargestatus: 'string'
+  unittype: 'category'
+  unitadmittime24: 'string'
+  unitadmitsource: 'string'
+  unitstaytype: 'category'
+  unitdischargetime24: 'string'
+  unitdischargelocation: 'string'
+  unitdischargestatus: 'category'
+  uniquepid: 'string'
+
+
+# when either lists are empty -> keeping all columns
+dropping_columns: True
+columns_to_drop: [ apacheadmissiondx ] # Already contained in table apache groups
+columns_to_keep: [ ]
+
+variable_units:
+  gender: "Category"
+  #age: "Years or '> 89'"
+  age: "Years"
+  ethnicity: "Category"
+  hospitalid: ""
+  wardid: ""
+  apacheadmissiondx: ""
+  admissionheight: "cm"
+  hospitaladmittime24: ""
+  hospitaladmitoffset: "Minutes"
+  hospitaladmitsource: ""
+  hospitaldischargeyear: "Year"
+  hospitaldischargetime24: ""
+  hospitaldischargeoffset: "Minutes"
+  hospitaldischargelocation: ""
+  hospitaldischargestatus: "Category"
+  unittype: ""
+  unitadmittime24: ""
+  unitadmitsource: ""
+  unitvisitnumber: ""
+  unitstaytype: ""
+  admissionweight: "kg"
+  dischargeweight: "kg"
+  unitdischargetime24: ""
+  unitdischargeoffset: "Minutes"
+  unitdischargelocation: ""
+  unitdischargestatus: "Category"
+  uniquepid: ""
+
+variables_pretty:
+  gender: "Gender"
+  age: "Age"
+  ethnicity: "Ethnicity"
+  hospitalid: "Hospital ID"
+  wardid: "Ward ID"
+  apacheadmissiondx: "APACHE Admission Diagnosis"
+  admissionheight: "Admission Height"
+  hospitaladmittime24: "Hospital Admit Time"
+  hospitaladmitoffset: "Hospital Admit Offset"
+  hospitaladmitsource: "Hospital Admit Source"
+  hospitaldischargeyear: "Hospital Discharge Year"
+  hospitaldischargetime24: "Hospital Discharge Time"
+  hospitaldischargeoffset: "Hospital Discharge Offset"
+  hospitaldischargelocation: "Hospital Discharge Location"
+  hospitaldischargestatus: "Hospital Discharge Status"
+  unittype: "Unit Type"
+  unitadmittime24: "Unit Admit Time"
+  unitadmitsource: "Unit Admit Source"
+  unitvisitnumber: "Unit Visit Number"
+  unitstaytype: "Unit Stay Type"
+  admissionweight: "Admission Weight"
+  dischargeweight: "Discharge Weight"
+  unitdischargetime24: "Unit Discharge Time"
+  unitdischargeoffset: "Unit Discharge Offset"
+  unitdischargelocation: "Unit Discharge Location"
+  unitdischargestatus: "Unit Discharge Status"
+  uniquepid: "Unique Patient ID"
+
+
+
+
+
+

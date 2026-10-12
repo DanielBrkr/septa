@@ -1,0 +1,20 @@
+# _16 denotes the data override down to Int/Float16 where applicable
+# Int/Float are nullable versions of int/float in pandas, which we need
+table_name: "apache_groups"
+table_name_pretty: "APACHE Groups"
+file_name: "apache_groups"
+time_offset_name: ""
+time_delta_column: ""
+
+paths:
+  #table_location: ${directories.data}/intake_output_regular_2024-02-14.parquet
+  table_location: ${directories.data}/../2024-02-25/apache_groups_regular_2024-03-11.parquet
+
+variable_units:
+  apachedxgroup: ""
+  apacheadmissiondx: ""
+
+variables_pretty:
+  apachedxgroup: "APACHE Diagnosis Group"
+  apacheadmissiondx: "APACHE Admission Diagnosis"
+
